@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
@@ -6,38 +6,40 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import am5themes_Responsive from '@amcharts/amcharts5/themes/Responsive'
 import './Map.css'
 
-type CountryItem = am5map.MapPolygon | undefined
+type CountryItem = am5map.MapPolygon
 
 interface IDataCountryContext {
   id: string
   name: string
 }
 
+interface IProps {
+  onCountrySelect: (countryCode: string) => void
+}
+
 const MAP_DIV_ID = "chartdiv"
 
-function Map() {
-  const [activeItem, setActiveItem] = useState<CountryItem>()
+function Map(props: IProps) {
+  const {onCountrySelect} = props
+
+  const selectedCountry = useRef<CountryItem>()
 
   const selectCountry = useCallback((activeItem: CountryItem) => {
-    setActiveItem((previousItem) => {
-      const previousId = previousItem?.dataItem?.uid
+    if (selectedCountry.current) {
+      const previousId = selectedCountry.current.dataItem?.uid
       const targetId = activeItem?.dataItem?.uid
 
-      console.log({previousId, targetId})
-
       if (previousId !== targetId) {
-        previousItem?.set("active", false)
+        selectedCountry.current.set("active", false)
       }
 
-      return activeItem
-    })
+    }
+    selectedCountry.current = activeItem
 
-    // TODO try to use SWR to call API
-    console.log({activeItem})
-    console.log(
-      (activeItem?.dataItem?.dataContext as IDataCountryContext)?.id
-    )
-  }, [])
+    // execute callback
+    const countryCode = (activeItem?.dataItem?.dataContext as IDataCountryContext)?.id
+    onCountrySelect(countryCode)
+  }, [onCountrySelect])
 
   useLayoutEffect(() => {
     const root = am5.Root.new(MAP_DIV_ID)
