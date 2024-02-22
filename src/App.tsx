@@ -1,6 +1,5 @@
-import Map from './components/Map'
-import './App.css'
 import { useState } from 'react'
+import Map from './components/Map'
 import InfoBox from './components/InfoBox'
 
 function App() {
