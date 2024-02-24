@@ -35,9 +35,9 @@ interface ICountryInfo {
   startOfWeek: string,
 }
 
-function useCountryInfo (countryCode: string) {
+function useCountryInfo (countryCode?: string) {
   const {data, error, isLoading} = useSWR<Array<ICountryInfo>, IRestCountriesError>(
-    `/alpha/${countryCode}`,
+    countryCode !== undefined ? `/alpha/${countryCode}` : null,
     countryFetcher
   )
 

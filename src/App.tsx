@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       <Map onCountrySelect={setCountry} />
-      {country !== undefined && <InfoBox countryCode={country} />}
+      {country !== undefined && (
+        <InfoBox countryCode={country} />
+      )}
     </>
   )
 }

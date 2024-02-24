@@ -24,7 +24,7 @@ function Map(props: IProps) {
 
   const selectedCountry = useRef<CountryItem>()
 
-  const selectCountry = useCallback((activeItem: CountryItem) => {
+  const selectCountry = useCallback((activeItem?: CountryItem) => {
     if (selectedCountry.current) {
       const previousId = selectedCountry.current.dataItem?.uid
       const targetId = activeItem?.dataItem?.uid
@@ -89,6 +89,8 @@ function Map(props: IProps) {
         }
 
         selectCountry(target)
+      } else {
+        selectCountry(undefined)
       }
     })
 
