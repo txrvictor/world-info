@@ -1,7 +1,10 @@
 # world-info
 
-Displays an interactive globe and info for each country. Simple project to test `Vite`, `SWR` and `amcharts`.
+Interactive world map, displays basic information for each country! Simple project to test `Vite`, `SWR` and `amcharts`.
 
+South Korea             |  Brazil
+:---------------------:|:---------------------:
+![South Korea](https://github.com/txrvictor/world-info/assets/75559055/d8c36630-9b17-47c4-b2a0-ef1f523cfdaa) | ![Brazil](https://github.com/txrvictor/world-info/assets/75559055/3fa206a2-b16f-4733-8a6c-4f36202fcd4d)
 
 ## Tech Used
 
