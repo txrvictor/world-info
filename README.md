@@ -23,6 +23,10 @@ South Korea             |  Brazil
 Clone the repo and execute:
 
 ```
+npm install
+```
+
+```
 npm run dev
 ```
 
